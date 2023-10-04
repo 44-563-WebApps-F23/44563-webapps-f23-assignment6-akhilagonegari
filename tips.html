@@ -16,6 +16,20 @@
     <input type="number" id="tipPercent" value="15"><br>
 
     <button onclick="tips()">Show tip</button>
+    <form>
+        <label>
+            <input type="radio" name="operation" value="sum" onClick="chooseOp()"> Sum
+        </label><br>
+        <label>
+            <input type="radio" name="operation" value="difference" onClick="chooseOp()"> Difference
+        </label><br>
+        <label>
+            <input type="radio" name="operation" value="product" onClick="chooseOp()"> Product
+        </label><br>
+        <label>
+            <input type="radio" name="operation" value="division" onClick="chooseOp()"> Division
+        </label><br>
+    </form>
 
     <p id="result"></p>
 
@@ -45,8 +59,25 @@
     var resultElement = document.getElementById("result");
     resultElement.innerHTML = "Tips are: " + myOutput;
 }
+function chooseOp() {
+            var baseAmount = parseFloat(document.getElementById("baseAmount").value);
+            var tipPercent = parseFloat(document.getElementById("tipPercent").value);
+            var operation = document.querySelector('input[name="operation"]:checked').value;
 
+            var resultElement = document.getElementById("result");
+
+            if (operation === "sum") {
+                resultElement.innerHTML = "Sum of " + baseAmount + " and " + tipPercent + " is " + (baseAmount + tipPercent);
+            } else if (operation === "difference") {
+                resultElement.innerHTML = "Difference of " + baseAmount + " and " + tipPercent + " is " + (baseAmount - tipPercent);
+            } else if (operation === "product") {
+                resultElement.innerHTML = "Product of " + baseAmount + " and " + tipPercent + " is " + (baseAmount * tipPercent);
+            } else if (operation === "division") {
+                resultElement.innerHTML = "Division of " + baseAmount + " by " + tipPercent + " is " + (baseAmount / tipPercent);
+            }
+        }
     </script>
+
 
 
 </body>
