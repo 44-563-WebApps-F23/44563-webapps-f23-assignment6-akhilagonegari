@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <head>
     <title>Author Page</title>
@@ -8,39 +9,63 @@
 <body>
     <h2>Author entry Akhila Gonegari</h2>
 
-</body>
-<form>
-    <label for="authorHidden">The hidden Author Name </label>
-    <input type="password" id="authorHidden" name="authorHidden" value="Dickens"> <br>
-
-    <label for="guessAuthor">Guess the Author </label>
-    <input type="text" id="guessAuthor" name="guessAuthor" autofocus> <br>
-
-    <input type="button" onclick="checkAuthor()" value="Check the guess">
-</form>
-
-<p id="result"></p>
-<script>
-    let good = 0;
-    let oops = 0;
-    function checkAuthor() {
+    <form>
+        <label for="hiddenName">The hidden author name</label>
+        <input type ="password" id="authorHide" name="hiddenName"  value="Dickens"> <br>
+    
+        <label for="Guess">Guess the author</label>
+        <input type ="text" id="guessAuthor" name="Guess" > <br>
+    
+        <input type="button" id = "checkGuessButton" onclick="checkAuthor()" value="Check the guess">
+    </form>
+    <div class="alert alert-danger mt-3" id="incorrectGuesses" style="display:none;">
+        Incorrect Guesses: <span id="incorrectCount">0</span>
+    </div>
+    
+    <div class="alert alert-warning mt-3" id="outOfGuesses" style="display:none;">
+        Sorry, ran out of guesses.
+    </div>
+    
+    <p id="result1">This result of Author </p>
+    
+    <div id="container">
+        <img id="cities" src="nai.jpg" alt="City Image" width="100" height="100" onclick="selectImage()">
+    </div>
+    
+    <script> 
+    good=0
+    oops=0
+    incorrectCount=0;
+    function checkAuthor (){
         console.log("Getting form values")
-        hiddenAuthor = document.getElementById("authorHidden").value
+        authorHide = document.getElementById("authorHide").value
         guessAuthor = document.getElementById("guessAuthor").value
-        out = document.getElementById("result")
-        if (hiddenAuthor == guessAuthor) {
-            good = good + 1
-            alert("You got it right")
+        
+        out = document.getElementById("result1")
+        if(authorHide==guessAuthor){
+            alert("You got it right");
+            good++
+            
+        } else {
+            alert("Sorry");
+            oops++
+            incorrectCount++;
+    
+                    // Display the incorrect guess count and show the div after 7 incorrect guesses
+                    document.getElementById("incorrectCount").textContent = incorrectCount;
+                    if (incorrectCount === 7) {
+                        document.getElementById("outOfGuesses").style.display = "block";
+                        document.getElementById("checkGuessButton").onclick = function () {
+                            alert("Sorry, ran out of guesses.");
+                        };
+                    } else {
+                        document.getElementById("incorrectGuesses").style.display = "block";
+                    }
+                
+    
         }
-        else {
-            oops = oops + 1
-            alert("Sorry")
-        }
-        updateResults();
-    }
-    function updateResults() {
-        const resultElement = document.getElementById('result');
-        resultElement.innerHTML = `Results: Good: ${good}, Oops: ${oops}`;
+        
+        out.innerHTML = "Good Counts"+good
     }
 </script>
 
